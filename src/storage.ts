@@ -1,12 +1,47 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import type { Todo } from './types';
+import { isTodoArray } from './utils';
 
-// TODO: Definisikan path file untuk menyimpan data To-Do
+const STORAGE_KEY = 'todo_app_data';
 
-// TODO: Buat fungsi untuk membaca To-Do dari file
-// Hint: Gunakan try-catch untuk handle error saat membaca file
+// ===Membaca semua To-Do dari localStorage===
+export function loadTodos(): Todo[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw === null) return [];
 
-// TODO: Buat fungsi untuk menyimpan To-Do ke file
-// Hint: Jangan lupa konversi ke JSON string sebelum disimpan
+    const parsed: unknown = JSON.parse(raw);
 
-// TODO: Buat fungsi untuk inisialisasi storage (buat file kosong jika belum ada)
+    // Gunakan type guard untuk memastikan data valid
+    if (isTodoArray(parsed)) {
+      return parsed;
+    }
+
+    console.error('Data di localStorage tidak valid, mereset data.');
+    return [];
+  } catch (error) {
+    console.error('Gagal membaca data dari localStorage:', error);
+    return [];
+  }
+}
+
+// ===Menyimpan semua To-Do ke localStorage===
+export function saveTodos(todos: Todo[]): void {
+  try {
+    const serialized = JSON.stringify(todos);
+    localStorage.setItem(STORAGE_KEY, serialized);
+  } catch (error) {
+    console.error('Gagal menyimpan data ke localStorage:', error);
+    throw new Error(
+      'Penyimpanan data gagal. Pastikan browser mengizinkan localStorage.'
+    );
+  }
+}
+
+// ===Menghapus semua data dari localStorage===
+export function clearStorage(): void {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (error) {
+    console.error('Gagal menghapus data dari localStorage:', error);
+  }
+}
