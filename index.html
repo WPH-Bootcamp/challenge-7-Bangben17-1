@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <h1>To Do App</h1>
+    </header>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <span class="stat-label">Total</span>
+        <span class="stat-value" id="stat-total">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Active</span>
+        <span class="stat-value" id="stat-active">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Done</span>
+        <span class="stat-value" id="stat-done">0</span>
+      </div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <main class="card">
+      <!-- Input Section -->
+      <section class="input-section">
+        <div class="input-wrapper">
+          <input
+            id="todo-input"
+            type="text"
+            placeholder="Tambahkan to-do baru..."
+            maxlength="120"
+            autocomplete="off"
+          />
+          <button id="add-btn">+ Tambah</button>
+        </div>
+        <p id="error-msg"></p>
+      </section>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <span class="filter-label">Filter:</span>
+        <button class="filter-btn active" data-filter="ALL">Semua</button>
+        <button class="filter-btn" data-filter="ACTIVE">Active</button>
+        <button class="filter-btn" data-filter="DONE">Done</button>
+      </div>
+
+      <!-- To Do List -->
+      <ul id="todo-list"></ul>
+
+      <!-- Empty State -->
+      <div id="empty-state">
+        <div class="empty-icon" role="img" aria-label="Clipboard Icon">📋</div>
+        <p class="empty-title">Belum ada to-do</p>
+        <p class="empty-sub">Tambahkan to-do pertama kamu di atas.</p>
+      </div>
+    </main>
+
+    <!-- COMPILED TYPESCRIPT -->
+    <script type="module" src="./dist/index.js"></script>
+  </body>
+</html>

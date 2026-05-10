@@ -1,6 +1,6 @@
-import type { Todo, CreateTodoPayload, FilterType } from './types';
-import { generateId } from './utils';
-import { loadTodos, saveTodos } from './storage';
+import type { Todo, CreateTodoPayload, FilterType } from './types.js';
+import { generateId } from './utils.js';
+import { loadTodos, saveTodos } from './storage.js';
 
 // ===Mengambil semua To-Do dari storage===
 export function getAllTodos(): Todo[] {

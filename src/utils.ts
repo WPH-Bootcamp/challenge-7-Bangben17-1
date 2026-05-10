@@ -1,4 +1,4 @@
-import type { Todo, TodoStatus } from './types';
+import type { Todo, TodoStatus } from './types.js';
 // ===Type guard: memvalidasi apakah sebuah string adalah TodoStatus yang valid===
 export function isTodoStatus(value: unknown): value is TodoStatus {
   return value === 'ACTIVE' || value === 'DONE';
