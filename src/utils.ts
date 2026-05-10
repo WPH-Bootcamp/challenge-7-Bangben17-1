@@ -1,8 +1,41 @@
-// TODO: Implementasikan type guards di sini
-// Hint: Type guard berguna untuk memastikan tipe data saat runtime
+import type { Todo, TodoStatus } from './types';
+// ===Type guard: memvalidasi apakah sebuah string adalah TodoStatus yang valid===
+export function isTodoStatus(value: unknown): value is TodoStatus {
+  return value === 'ACTIVE' || value === 'DONE';
+}
 
-// TODO: Buat fungsi untuk memvalidasi apakah suatu objek adalah To-Do yang valid
+// ===Type guard: memvalidasi apakah sebuah objek adalah Todo yang valid===
+export function isTodo(value: unknown): value is Todo {
+  if (typeof value !== 'object' || value === null) return false;
 
-// TODO: Buat fungsi helper untuk menampilkan tanggal/waktu dengan format yang bagus
+  const obj = value as Record<string, unknown>;
 
-// TODO: Buat fungsi untuk memastikan input dari user adalah string yang valid
+  return (
+    typeof obj['id'] === 'string' &&
+    typeof obj['title'] === 'string' &&
+    typeof obj['createdAt'] === 'string' &&
+    isTodoStatus(obj['status'])
+  );
+}
+
+// ===Type guard: memvalidasi apakah sebuah nilai adalah array of Todo===
+export function isTodoArray(value: unknown): value is Todo[] {
+  return Array.isArray(value) && value.every(isTodo);
+}
+
+// ===Helper: membuat ID unik berbasis timestamp + random string===
+export function generateId(): string {
+  return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+}
+
+// ===Helper: memformat tanggal ISO ke format yang mudah dibaca===
+export function formatDate(isoString: string): string {
+  const date = new Date(isoString);
+  return date.toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
