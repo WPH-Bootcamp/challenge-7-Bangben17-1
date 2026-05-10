@@ -1,5 +1,5 @@
-import type { Todo, FilterType } from './types';
-import { formatDate } from './utils';
+import type { Todo, FilterType } from './types.js';
+import { formatDate } from './utils.js';
 import {
   addTodo,
   deleteTodo,
@@ -7,7 +7,7 @@ import {
   uncompleteTodo,
   getFilteredTodos,
   getTodoStats,
-} from './todoService';
+} from './todoService.js';
 
 // ===State===
 let currentFilter: FilterType = 'ALL';

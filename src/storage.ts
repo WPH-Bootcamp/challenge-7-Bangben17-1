@@ -1,5 +1,5 @@
-import type { Todo } from './types';
-import { isTodoArray } from './utils';
+import type { Todo } from './types.js';
+import { isTodoArray } from './utils.js';
 
 const STORAGE_KEY = 'todo_app_data';
 

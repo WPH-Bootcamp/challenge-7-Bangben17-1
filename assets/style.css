@@ -1,0 +1,486 @@
+/* ===Google Fonts=== */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+/* ===CSS VARIABLES=== */
+:root {
+  --bg: #0e0f11;
+  --surface: #16181c;
+  --surface-2: #1e2026;
+  --border: #2a2d35;
+  --border-2: #363a45;
+  --text: #e8eaf0;
+  --text-muted: #6b7280;
+  --text-dim: #9ca3af;
+  --accent: #7c6aff;
+  --accent-glow: #7c6aff44;
+  --green: #34d399;
+  --green-dim: #34d39920;
+  --red: #f87171;
+  --red-dim: #f8717120;
+  --yellow: #fbbf24;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --transition: 180ms ease;
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+/* ===RESET=== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-display);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 16px 80px;
+  /* Subtle grid background */
+  background-image:
+    linear-gradient(rgba(124, 106, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 106, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ===Header=== */
+header {
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.header-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-tag::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--accent);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--text) 40%, var(--text-dim));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===Stats Bar=== */
+.stats-bar {
+  width: 100%;
+  max-width: 640px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: border-color var(--transition);
+}
+
+.stat-card:hover {
+  border-color: var(--border-2);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-card:nth-child(1) .stat-value {
+  color: var(--text);
+}
+.stat-card:nth-child(2) .stat-value {
+  color: var(--yellow);
+}
+.stat-card:nth-child(3) .stat-value {
+  color: var(--green);
+}
+
+/* ===MAIN CARD=== */
+.card {
+  width: 100%;
+  max-width: 640px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.5);
+  overflow: hidden;
+}
+
+/* ===INPUT SECTION=== */
+.input-section {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#todo-input {
+  flex: 1;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 15px;
+  padding: 11px 16px;
+  outline: none;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+#todo-input::placeholder {
+  color: var(--text-muted);
+}
+
+#todo-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+#todo-input.input-error {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px var(--red-dim);
+}
+
+#add-btn {
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 11px 22px;
+  white-space: nowrap;
+  transition:
+    opacity var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+#add-btn:hover {
+  opacity: 0.88;
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+#add-btn:active {
+  transform: scale(0.96);
+}
+
+#add-btn.animate-pop {
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#error-msg {
+  display: none;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--red);
+}
+
+/* ===FILTER BAR=== */
+.filter-bar {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.filter-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-right: 4px;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 5px 14px;
+  transition: all var(--transition);
+}
+
+.filter-btn:hover {
+  border-color: var(--border-2);
+  color: var(--text-dim);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ===TO DO LIST=== */
+#todo-list {
+  list-style: none;
+  padding: 8px 0;
+  min-height: 60px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  transition:
+    background var(--transition),
+    opacity var(--transition),
+    transform var(--transition);
+  animation: slide-in 0.2s ease;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item:hover {
+  background: var(--surface-2);
+}
+
+.todo-item.done .todo-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.todo-item.removing {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===CHECK BUTTON=== */
+.check-btn {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--border-2);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  color: transparent;
+}
+
+.check-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+.check-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--green-dim);
+}
+
+.todo-item.done .check-btn {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+/* ===TO DO CONTENT=== */
+.todo-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.todo-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color var(--transition);
+}
+
+.todo-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.todo-status-badge {
+  font-weight: 500;
+}
+
+.todo-item:not(.done) .todo-status-badge {
+  color: var(--yellow);
+}
+.todo-item.done .todo-status-badge {
+  color: var(--green);
+}
+
+/* ===DELETE BUTTON=== */
+.delete-btn {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  opacity: 0;
+  padding: 6px;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.todo-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  background: var(--red-dim);
+  color: var(--red);
+}
+
+/* ===EMPTY STATE=== */
+#empty-state {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 52px 20px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 2.5rem;
+  opacity: 0.4;
+}
+
+.empty-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+.empty-sub {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ===RESPONSIVE=== */
+@media (max-width: 480px) {
+  .stats-bar {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .stat-card {
+    padding: 12px;
+  }
+  .stat-value {
+    font-size: 1.4rem;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
+  }
+  #add-btn {
+    width: 100%;
+  }
+
+  .delete-btn {
+    opacity: 1;
+  }
+}
